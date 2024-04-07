@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from "./components/header";
+import WienPanoImage from "./components/wien-pano-image";
+import SearchResultPage from './pages/search-result-page'; // You'll create this component
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <header className="App-header" style={{
+                    height: '6vh',
+                }}><Header /></header>
+                <Routes>
+                    <Route path="/" element={<WienPanoImage />} />
+                    <Route path="/search-result" element={<SearchResultPage />} />
+                    {/* Define additional routes as needed */}
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
