@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from "./components/header";
+import Header from "./components/Header";
 import WienPanoImage from "./components/wien-pano-image";
 import SearchResultPage from './pages/search-result-page'; // You'll create this component
 
