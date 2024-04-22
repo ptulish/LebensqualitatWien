@@ -2,11 +2,20 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Button, Container, Dropdown, Form, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import {useSearchParams} from "react-router-dom";
-import ResultData from "./ResultData";
+import ResultData from "../Data/ResultData";
+import {forEach} from "react-bootstrap/ElementChildren";
+import {Feedback} from "../Data/Feedback";
 
 interface AddressCheckResponse {
     isValid: boolean;
     message: string;
+}
+interface FeedbackData {
+    Id: number;
+    Name: string;
+    Email: string;
+    Comment: string;
+    Rating: number;
 }
 
 
@@ -34,13 +43,75 @@ const Header: React.FC = () => {
         setErrorMessage('Die Adresse befindet sich nicht in Österreich!');
     }
 
+    const handleStats: React.MouseEventHandler<HTMLElement> = (event) => {
+        console.log('Navigation link clicked');
+        // Additional logic for handling click event
+        fetch('http://localhost:5062/api/stats', {method: 'GET'})
+            .then(response => {
+                if (!response.ok) { // Проверка статуса ответа
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json(); // Парсинг JSON
+            })
+            .then(data => {
+                ResultData.BibliothekCount = data.BibliotheksCount;
+                ResultData.ClinicCount = data.ClinicsCount;
+                ResultData.DisParkCount = data.DisParkCount;
+                ResultData.DoctorsCount = data.DoctorsCount;
+                ResultData.KindergartdensCount = data.KindergartdensCount;
+                ResultData.MuseumsCount = data.MuseumsCount;
+                ResultData.MusicSchoolsCount = data.MusikSchoolsCount;
+                ResultData.ParksCount =  data.ParksCount;
+                ResultData.PoliceStationsCount = data.PoliceCount;
+                ResultData.PoolsCount = data.PoolCount;
+                ResultData.SchoolsCount = data.SchoolsCount;
+                ResultData.StopsCount = data.StopsCount;
+                ResultData.UniversitiesCount = data.UnisCount;
+                navigate('/stats');
+
+                console.log(data)
+            })
+            .catch(error => {
+                console.error('Fehler:', error);
+            });
+    }
+
+    const handleFeedback: React.MouseEventHandler<HTMLElement> = (event) => {
+        console.log('Navigation link clicked');
+        // Additional logic for handling click event
+        fetch('http://localhost:5062/api/feedbacks', {method: 'GET'})
+            .then(response => {
+                if (!response.ok) { // Проверка статуса ответа
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                if (response.status == 209){
+                    return "keine Feedbacks";
+                }
+                return response.json(); // Парсинг JSON
+            })
+            .then(data => {
+                if (data == "keine Feedbacks"){
+                    navigate("/feedbacks")
+                    return;
+                } else {
+                    ResultData.Feedbacks = data.map((obj: { Id: number; Name: string; Email: string; Comment: string; Rating: number; }) => new Feedback(obj.Id, obj.Name, obj.Email, obj.Comment, obj.Rating));
+                    navigate("/feedbacks")
+                }
+
+
+            })
+            .catch(error => {
+                console.error('Fehler:', error);
+            });
+    }
+
     const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         console.log('hello');
 
         // Validate address format
-        const addressPattern = /^[a-zA-ZäöüßÄÖÜ-]+(?:\s[a-zA-ZäöüßÄÖÜ-]+)*\s\d+$/;
+        const addressPattern = /^[a-zA-ZäöüßÄÖÜ-]+(?:\s[a-zA-ZäöüßÄÖÜ-]+)*\s\d{1,2}(?:-\d{1,2})?$/;
         if (!addressPattern.test(searchQuery.trim())) {
             GetErrorMessageWrongInput();
             return;
@@ -71,6 +142,7 @@ const Header: React.FC = () => {
             })
             .then(data => {
                 ResultData.UserGroupName = selectedItem;
+                console.log(data)
                 navigate('/search-result', { state: { data: data } });
 
             })
@@ -94,71 +166,70 @@ const Header: React.FC = () => {
 
     return (
         <div>
-            <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
-                <Container fluid>
-                    <Navbar.Brand href="#">Lebensqualitat in Wien</Navbar.Brand>
-                    <Form className="d-flex" style={{ width: '50%' }} onSubmit={handleSearch}>
-                        <Form.Control
-                            name="search"
-                            type="search"
-                            placeholder="Geben Sie eine Adresse ein...  [Strasse][Hausnummer]"
-                            className="me-2"
-                            aria-label="Search"
-                            onChange={handleInputChange}
-                            style={{ backgroundColor: showErrorInput ? 'red' : undefined }}
-                        />
-                        <Form.Control.Feedback type="invalid" style={{ display: showErrorInput ? 'block' : 'none' }}>
-                            {errorMessage}
-                        </Form.Control.Feedback>
-                        <Dropdown onSelect={handleSelect} style={{ }}>
-                            <Dropdown.Toggle variant="light" id="dropdown-basic" style={{ backgroundColor: showErrorSelItem ? 'red' : undefined, height: '500' }}>
-                                {dropdownTitle}
-                            </Dropdown.Toggle>
+            <header className="App-header">
+                <Navbar expand="lg" className="bg-body-tertiary" fixed="top" style={{height:'6vh', verticalAlign: 'middle'}}>
+                    <Container fluid>
+                        <Navbar.Brand href="/">Lebensqualitat in Wien</Navbar.Brand>
+                        <Form className="d-flex" style={{ width: '40%' }} onSubmit={handleSearch}>
+                            <Form.Control
+                                name="search"
+                                type="search"
+                                placeholder="Geben Sie eine Adresse ein...  [Strasse][Hausnummer]"
+                                className="me-2"
+                                aria-label="Search"
+                                onChange={handleInputChange}
+                                style={{ backgroundColor: showErrorInput ? 'red' : undefined }}
+                            />
+                            <Form.Control.Feedback type="invalid" style={{ display: showErrorInput ? 'block' : 'none' }}>
+                                {errorMessage}
+                            </Form.Control.Feedback>
+                            <Dropdown onSelect={handleSelect} style={{ }}>
+                                <Dropdown.Toggle variant="light" id="dropdown-basic" style={{ backgroundColor: showErrorSelItem ? 'red' : undefined, height: '500' }}>
+                                    {dropdownTitle}
+                                </Dropdown.Toggle>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item eventKey="family">Familie</Dropdown.Item>
-                                <Dropdown.Item eventKey="student">Student</Dropdown.Item>
-                                <Dropdown.Item eventKey="alone">Aleinwohnen</Dropdown.Item>
-                                <Dropdown.Item eventKey="young-couple">Young Couple</Dropdown.Item>
-                                <Dropdown.Item eventKey="pensioneur">Rentner</Dropdown.Item>
-                                <Dropdown.Item eventKey="invalid">Behinderte</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                        <Button type="submit" variant="outline-success" >Search</Button>
-                    </Form>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="ms-auto my-2 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <NavDropdown title="Algorithmus" id="navbarScrollingDropdownAlg">
-                                <NavDropdown.Item href="#action6">
-                                    Algorithmus
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#action7">
-                                    Mach dein eigenes Algorithmus
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                            <Nav.Link href="#action1" style={{textAlign: 'left'}}>Starterseite</Nav.Link>
-                            <Nav.Link href="#action1" style={{textAlign: 'left'}}>Über Wien</Nav.Link>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item eventKey="family">Familie</Dropdown.Item>
+                                    <Dropdown.Item eventKey="student">Student</Dropdown.Item>
+                                    <Dropdown.Item eventKey="alone">Aleinwohnen</Dropdown.Item>
+                                    <Dropdown.Item eventKey="young-couple">Young Couple</Dropdown.Item>
+                                    <Dropdown.Item eventKey="pensioneur">Rentner</Dropdown.Item>
+                                    <Dropdown.Item eventKey="invalid">Behinderte</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            <Button type="submit" variant="outline-success" >Search</Button>
+                        </Form>
+                        <Navbar.Toggle aria-controls="navbarScroll" />
+                        <Navbar.Collapse id="navbarScroll">
+                            <Nav
+                                className="ms-auto my-2 my-lg-0"
+                                style={{ maxHeight: '5vh' }}
+                                navbarScroll
+                            >
+                                <NavDropdown title="Algorithmus" id="navbarScrollingDropdownAlg">
+                                    <NavDropdown.Item href="/alg-explain">
+                                        Algorithmus
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="#action7">
+                                        Mach dein eigenes Algorithmus
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                                <Nav.Link href="/" className='nav-link-class'>Starterseite</Nav.Link>
+                                <Nav.Link className='nav-link-class' onClick={handleStats}>Über Wien</Nav.Link>
 
-                            <NavDropdown title="Sonstiges" id="navbarScrollingDropdownSon">
-                                <NavDropdown.Item href="#action3">
-                                    Feedback
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">
-                                    Ideen
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#action5">
-                                    Impressum
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+                                <NavDropdown title="Sonstiges" id="navbarScrollingDropdownSon">
+                                    <NavDropdown.Item onClick={handleFeedback}>
+                                        Feedbacks
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="#action5">
+                                        Impressum
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+            </header>
         </div>
     );
 };

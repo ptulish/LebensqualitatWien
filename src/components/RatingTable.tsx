@@ -1,4 +1,6 @@
-import ResultData from "./ResultData";
+import ResultData from "../Data/ResultData";
+import RatingImageSmall from "./RatingImageSmall";
+import "../styles/RatingTable.css"
 
 function getColorByRating(rating: string) {
     const numRating = parseFloat(rating);
@@ -21,19 +23,19 @@ function formatRating(rating: string) {
 
 const RatingTable: React.FC = () => {
     const ratingValues = [
-        ['Bibliothek Rating', ResultData.BibliothekRating],
-        ['Clinic Rating', ResultData.ClinicRating],
-        ['Disability Park Rating', ResultData.DisParkRating],
-        ['Doctor Rating', ResultData.DoctorRating],
-        ['Kindergarten Rating', ResultData.KinderGartenRating],
-        ['Museum Rating', ResultData.MuseumRating],
-        ['Music School Rating', ResultData.MusikSchoolRating],
-        ['Park Rating', ResultData.ParkRating],
-        ['Police Station Rating', ResultData.PoliceStationRating],
-        ['Pool Rating', ResultData.PoolRating],
-        ['Public Transport Rating', ResultData.PublicTransportRating],
-        ['School Rating', ResultData.SchoolRating],
-        ['University Rating', ResultData.UniversityRating],
+        ['Bibliotheken', ResultData.BibliothekRating],
+        ['Karnkenhäuser', ResultData.ClinicRating],
+        ['Behindertparkplätze', ResultData.DisParkRating],
+        ['Ärzte', ResultData.DoctorRating],
+        ['Kindergarten', ResultData.KinderGartenRating],
+        ['Museen', ResultData.MuseumRating],
+        ['Musikschulen', ResultData.MusikSchoolRating],
+        ['Parken', ResultData.ParkRating],
+        ['Polizeistellen', ResultData.PoliceStationRating],
+        ['Schwimmbäder', ResultData.PoolRating],
+        ['Öffentliche Verkersmittel', ResultData.PublicTransportRating],
+        ['Schulen', ResultData.SchoolRating],
+        ['Universitäten', ResultData.UniversityRating],
     ];
     let color: string;
 
@@ -44,31 +46,16 @@ const RatingTable: React.FC = () => {
     }
 
     return (
-        <table style={{
-            margin: '2%',
-            width: '70%', /* Заполнение всего доступного пространства */
-            borderCollapse: 'collapse',
-            fontSize: '22px'
-        }}>
+        <table>
             <tbody>
             {rows.map((row, rowIndex) => (
-                <tr key={rowIndex} style={{
-                    border: '0px solid white', // Удаление границ ячеек
-                    textAlign: 'left', // Выравнивание текста по левому краю
-                    padding: '8px'
-                }}>
+                <tr key={rowIndex}>
                     {row.map(([ratingKey, ratingValue], cellIndex) => (
-                        ratingValue != "-1" ? (
-                            <td key={cellIndex} style={{
-                                border: '1px solid white', // Добавление границ ячеек
-                                padding: '8px',
-                                textAlign: 'left',
-                                justifyContent: 'space-between',
-                                width: 'auto'
-                            }}>
-                                <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
-                                    <span>{ratingKey}: </span>
-                                    <span style={{color: getColorByRating(ratingValue)}}>{formatRating(ratingValue)}</span>
+                        ratingValue !== "-1" ? (
+                            <td key={cellIndex}>
+                                <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', verticalAlign: 'middle'}}>
+                                    <span><RatingImageSmall number={ratingKey}/>{ratingKey}: </span>
+                                    <span style={{color: getColorByRating(ratingValue)}} className="rating">{formatRating(ratingValue)}</span>
                                 </div>
                             </td>
                         ) : null // Пропускаем ячейку, если ratingValue равно "-1"

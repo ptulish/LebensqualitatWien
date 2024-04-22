@@ -1,0 +1,66 @@
+.feedbacks-page {
+    width: 100%;
+    height: 94vh;
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+}
+
+.feedbacks-image-container {
+    height: 85vh;
+    width: 85vw;
+    background-color: rgba(255,0,0,0.80);
+    justify-content: center;
+    margin: auto;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+}
+.feedbacks-image-content{
+    width: 100%;
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 18px;
+
+}
+.feedback-name{
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.feedbacks-container{
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+.feedbacks-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-window {
+    width: 40vw;
+    height: 42vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-form-input {
+    margin: 20px;
+}
+
+.form-input{
+    height: 15vh;
+    width: 100%;
+    margin-top: 10px;
+    vertical-align: top;
+    overflow-wrap: break-word;
+}
+
+.form-comment{
+    height: 18vh;
+}

@@ -1,0 +1,18 @@
+.address {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.park-table {
+    width: 45%;
+    max-width: 45%;
+}
+
+.table-container {
+    max-height: 30vh;
+    width: 100%;
+    border: 0px solid white;
+}

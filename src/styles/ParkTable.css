@@ -1,0 +1,21 @@
+.park-table {
+    max-width: 55%;
+    width: 55%;
+    max-height: 30vh;
+    font-size: 12px;
+}
+.table-container {
+    overflow-y: auto;
+}
+table {
+    width: 100%;
+}
+th {
+    font-size: 18px;
+    padding: 1vh;
+}
+
+td, tr {
+    min-width: 20%;
+    text-align: center;
+}

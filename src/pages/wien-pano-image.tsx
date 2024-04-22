@@ -10,10 +10,8 @@ export default class WienPanoImage extends Component {
                     backgroundImage: `url(${wienPanoram})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    width: '100vw',
-                    height: '100vh', // Adjust this value as needed
-                    display: 'flex', // Use flexbox to center content
-                    justifyContent: 'center', // Center horizontally
+                    width: '100%',
+                    height: '94vh', // Adjust this value as needed
                     alignItems: 'center', // Center vertically
                 }}>
                     {/* Content div on the image */}
@@ -24,7 +22,7 @@ export default class WienPanoImage extends Component {
                         color: 'white', // Text color
                         textAlign: 'left', // Align text to the left
                     }}>
-                        <h1 style={{ color: "red"}}>Lebensqualotät in Wien</h1>
+                        <h1 style={{ color: "red"}}>Lebensqualität in Wien</h1>
                         <p style={{ color: "red"}}>Erfahre über das Lebensqualität an veschiedenen Adressen in Wien</p>
                     </div>
                 </div>

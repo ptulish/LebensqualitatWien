@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import ResultComponent from "../components/result-component";
-import ResultData from "../components/ResultData";
+import ResultData from "../Data/ResultData";
 import WienImage from "../Assets/wien-panorama_fotolia.jpg"
 import InnereStadtInmage from "../Assets/innere-stadt.jpg"
 import LeopoldstadtImage from "../Assets/leopoldstadt.jpg"
@@ -26,30 +26,11 @@ import BrigittenauImage from "../Assets/brigittenau.jpg"
 import FloridsdorfImage from "../Assets/floridsdorf.jpg"
 import DonaustadtImage from "../Assets/donaustadt.jpg"
 import LiesingImage from "../Assets/liesing.jpg"
-import WienPanoImage from "../components/wien-pano-image";
 
 interface TransparentBorderProps {}
 
-
-function SearchResultPage() {
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const query = searchParams.get('query');
-    let data = location.state?.data;
-    console.log(22);
-    // Check if data is a string and parse it if necessary
-    if (typeof data === 'string') {
-        try {
-            data = JSON.parse(data);
-        } catch (error) {
-            console.error("Error parsing data:", error);
-            return <div>Error parsing data.</div>;
-        }
-    }
-
-
-    const TransparentBorder = styled.div<TransparentBorderProps>`
-        width: 70%;
+const TransparentBorder = styled.div<TransparentBorderProps>`
+        width: 70vw;
         height: 92vh;
         margin: auto;
         position: absolute;
@@ -61,27 +42,44 @@ function SearchResultPage() {
         font-family: 'Roboto', sans-serif; /* Шрифт без засечек */
         font-weight: 600; /* Полужирное начертание */
     `;
-    ResultData.Address = data.address;
-    ResultData.District = data.districtName;
-    ResultData.BibliothekRating = data.bibliothekRating;
-    ResultData.ClinicRating = data.clinicRating;
-    ResultData.DisParkRating = data.disParkRating;
-    ResultData.DoctorRating = data.doctorRating;
-    ResultData.KinderGartenRating = data.kinderGartenRating;
-    ResultData.MuseumRating = data.museumRating;
-    ResultData.MusikSchoolRating = data.musikSchoolRating;
-    ResultData.ParkRating = data.parkRating;
-    ResultData.PoliceStationRating = data.policeStationRating;
-    ResultData.PoolRating = data.poolRating;
-    ResultData.PublicTransportRating = data.publicTransportRating;
-    ResultData.SchoolRating = data.schoolRating;
-    ResultData.UniversityRating = data.universityRating;
-    ResultData.AverageRating = data.averageRating;
 
-
-
+function SearchResultPage() {
+    const location = useLocation();
     var image: string;
+    let data = location.state?.data;
 
+    if (typeof data === 'string') {
+        try {
+            data = JSON.parse(data);
+        } catch (error) {
+            console.error("Error parsing data:", error);
+            return <div>Error parsing data.</div>;
+        }
+    }
+
+    ResultData.Address = data.Address;
+    ResultData.District = data.DistrictName;
+    ResultData.BibliothekRating = data.BibliothekRating;
+    ResultData.ClinicRating = data.ClinicRating;
+    ResultData.DisParkRating = data.DisParkRating;
+    ResultData.DoctorRating = data.DoctorRating;
+    ResultData.KinderGartenRating = data.KinderGartenRating;
+    ResultData.MuseumRating = data.MuseumRating;
+    ResultData.MusikSchoolRating = data.MusikSchoolRating;
+    ResultData.ParkRating = data.ParkRating;
+    ResultData.PoliceStationRating = data.PoliceStationRating;
+    ResultData.PoolRating = data.PoolRating;
+    ResultData.PublicTransportRating = data.PublicTransportRating;
+    ResultData.SchoolRating = data.SchoolRating;
+    ResultData.UniversityRating = data.UniversityRating;
+    ResultData.AverageRating = data.AverageRating;
+    ResultData.Lines = data.Lines;
+    ResultData.LinesDistance = data.LinesKM;
+    ResultData.ParkNames = data.ParkNames;
+    ResultData.ParkDogs = data.ParkDog;
+    ResultData.ParkPlay = data.ParkPlay;
+    ResultData.ParkDrinks = data.ParkDrink;
+    ResultData.ParkDistances = data.ParkDistances;
 
     switch (ResultData.District){
         case "Innere Stadt":

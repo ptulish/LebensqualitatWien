@@ -1,4 +1,5 @@
-import ResultData from "./ResultData";
+import ResultData from "../Data/ResultData";
+import "../styles/Address.css"
 
 function capitalizeWords(str: string): string {
     return str
@@ -19,19 +20,14 @@ function capitalizeWords(str: string): string {
 function Address() {
     var Street = capitalizeWords(ResultData.Address);
     var District = capitalizeWords(ResultData.District);
-    return <div  style={{
-        marginTop: '3vh',
-        textAlign: 'center',
-        verticalAlign: 'middle',
-        alignItems: "end",
-        fontSize: '40px',
-        backgroundColor: "transparent",
-        height: 'auto',
-        width: 'auto',
+    return <div className="address" >
+        <div>
+            <h1>{Street}</h1>
+        </div>
+        <div>
+            <h2>{District}</h2>
 
-    }}>
-        <h1>{Street}</h1>
-        <h2>{District}</h2>
+        </div>
     </div>;
 }
 

@@ -1,0 +1,10 @@
+.div-container{
+    vertical-align: center;
+    height: auto;
+    width: auto;
+}
+.avg-rating {
+    font-size: 100px;
+    border: 1px #61dafb;
+    margin: 10px;
+}

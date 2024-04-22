@@ -1,0 +1,139 @@
+.explain-algorithm-page {
+    width: 100%;
+    height: 94vh;
+    min-height: 40vh;
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+}
+
+.explain-algorithm-page-content {
+    background-color: rgba(255,0,0,0.80);
+    border-radius: 20px;
+    width: 80%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    vertical-align: center;
+    padding: 1%;
+    margin: 1%;
+}
+.explain-algorithm-page-header{
+    height: auto;
+}
+.explain-algorithm-page-carousel-container{
+    width: 100%;
+    height: 80%;
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+}
+.carousel-control-prev-icon {
+    margin-right: auto;
+    width: auto;
+}
+.carousel-control-next-icon {
+    margin-left: auto;
+    width: 2vh;
+}
+.step-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.carousel-control-prev, .carousel-control-next {
+    width: 7% !important; /* Увеличение ширины кнопки */
+    height: 100%; /* Высота равна высоте карусели */
+}
+
+.step-container {
+    height: 70vh;
+    width: 100%;
+}
+
+.step-content-exp {
+    margin: 1% 5% 2% 5%;
+    padding: 1%;
+    height: 75%;
+    font-size: 18px;
+}
+
+.buttons-place {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.group-button {
+    width: 16%;
+    margin: 1%;
+}
+
+.distance-button {
+    width: 20%;
+    margin: 1%;
+}
+
+
+.menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 1%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.count-button {
+    width: auto;
+    align-self: end;
+    margin-bottom: 2%;
+}
+
+
+.count-table {
+    width: 100%;
+    color: black;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Убедитесь, что оверлей будет поверх других элементов */
+}
+
+.menu-content {
+    margin: 2vh 0 0 0;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    color: red;
+}
+
+.distance-table {
+    overflow-y: auto;
+    height: 70vh;
+    overflow-x: hidden;
+}
