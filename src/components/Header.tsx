@@ -29,7 +29,7 @@ const Header: React.FC = () => {
 
     const handleStats: React.MouseEventHandler<HTMLElement> = (event) => {
         console.log('Navigation link clicked');
-        fetch('http://localhost:5062/api/stats', {method: 'GET'})
+        fetch('http://api:5062/api/stats', {method: 'GET'})
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok ' + response.statusText);
@@ -56,6 +56,7 @@ const Header: React.FC = () => {
             })
             .catch(error => {
                 console.error('Fehler:', error);
+                console.log("hello");
             });
     }
 
