@@ -40,25 +40,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 6%; /* или 8%, в зависимости от ваших предпочтений */
+  padding-top: 6%;
 }
 
-.address-center {
-  /* Любые дополнительные стили для компонента Address */
-}
 
 .ratings {
-  width: 100%; /* Если нужно, чтобы занимало всю ширину контейнера */
-  /* Дополнительные стили для секции с рейтингами */
+  width: 100%;
 }
 
 table {
-  width: 100%; /* Заполнение всего доступного пространства */
-  border-collapse: collapse; /* Удаление двойных границ */
+  width: 100%;
+  border-collapse: collapse;
 }
 
 td, th {
-  border: 1px solid black; /* Добавление границ ячейкам */
-  text-align: left; /* Выравнивание текста по левому краю */
-  padding: 8px; /* Отступы внутри ячеек */
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
 }

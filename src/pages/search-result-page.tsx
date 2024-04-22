@@ -166,10 +166,10 @@ function SearchResultPage() {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     width: 'auto',
-                    height: '94vh', // Adjust this value as needed
-                    display: 'flex', // Use flexbox to center content
-                    justifyContent: 'center', // Center horizontally
-                    alignItems: 'center', // Center vertically
+                    height: '94vh',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                 }}>
                     <TransparentBorder>
                         <ResultComponent></ResultComponent>

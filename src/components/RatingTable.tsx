@@ -7,11 +7,11 @@ function getColorByRating(rating: string) {
     if (numRating >= 3.9) {
         return '#90EE90';
     } else if (numRating >= 2.5) {
-        return '#FFD700'; // Золотисто-жёлтый
+        return '#FFD700';
     } else if (numRating >= 1.5) {
-        return '#D8BFD8'; // Светло-сиреневый
+        return '#D8BFD8';
     } else {
-        return '#FFA07A'; // Светло-оранжевый
+        return '#FFA07A';
     }
 }
 function formatRating(rating: string) {
@@ -39,7 +39,6 @@ const RatingTable: React.FC = () => {
     ];
     let color: string;
 
-    // Разделяем массив на строки для таблицы
     const rows = [];
     for (let i = 0; i < ratingValues.length; i += 3) {
         rows.push(ratingValues.slice(i, i + 3));
@@ -58,9 +57,8 @@ const RatingTable: React.FC = () => {
                                     <span style={{color: getColorByRating(ratingValue)}} className="rating">{formatRating(ratingValue)}</span>
                                 </div>
                             </td>
-                        ) : null // Пропускаем ячейку, если ratingValue равно "-1"
+                        ) : null
                     ))}
-                    {/* Добавляем пустые ячейки, если строка короче остальных */}
                     {Array.from({ length: 3 - row.filter(item => item[1] !== "-1").length }).map((_, emptyCellIndex) => (
                         <td key={`empty-${emptyCellIndex}`} />
                     ))}

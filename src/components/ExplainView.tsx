@@ -10,19 +10,15 @@ interface ExplainViewProps {
 }
 
 function formatDistance(distanceStr: string): string {
-    // Konvertiere die Zeichenkette in eine Zahl
-    var distance = parseFloat(distanceStr.replace(',', '.')); // Ersetze ',' durch '.', um eine korrekte Umwandlung zu gewährleisten
+    var distance = parseFloat(distanceStr.replace(',', '.'));
 
     if (isNaN(distance)) {
-        // Wenn die Konvertierung fehlschlägt, gib die ursprüngliche Zeichenkette zurück
         return distanceStr;
     }
 
     if (distance < 1) {
-        // Wenn die Entfernung kleiner als 1 ist, formatiere sie in Meter
         return (distance * 1000).toFixed(2) + " Meter";
     } else {
-        // Ansonsten formatiere sie in Kilometer
         return (distance).toFixed(2) + " KM";
     }
 }
@@ -125,7 +121,7 @@ const ExplainView: React.FC<ExplainViewProps> = ({ isOpen, onClose }) => {
         stopLine = "Zug";
         stopStatement = ", also bekommt es noch 1 zum Rating"
     }
-    else if (ResultData.Lines[0].startsWith("N")) // Проверка на начало строки с 'N'
+    else if (ResultData.Lines[0].startsWith("N"))
     {
         stopLine = "Night";
         stopStatement = ", also bekommt es noch 0.8 zum Rating"

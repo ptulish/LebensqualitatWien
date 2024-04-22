@@ -1,37 +1,21 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Button, Container, Dropdown, Form, Nav, Navbar, NavDropdown} from 'react-bootstrap';
-import {useSearchParams} from "react-router-dom";
 import ResultData from "../Data/ResultData";
-import {forEach} from "react-bootstrap/ElementChildren";
 import {Feedback} from "../Data/Feedback";
-
-interface AddressCheckResponse {
-    isValid: boolean;
-    message: string;
-}
-interface FeedbackData {
-    Id: number;
-    Name: string;
-    Email: string;
-    Comment: string;
-    Rating: number;
-}
-
 
 const Header: React.FC = () => {
     let navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedItem, setSelectedItem] = useState('');
     const [dropdownTitle, setDropdownTitle] = useState('Kategorie');
-    const [showErrorSelItem, setShowErrorSelItem] = useState(false); // State to manage error visibility
+    const [showErrorSelItem, setShowErrorSelItem] = useState(false);
     const [showErrorInput, setShowErrorInput] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(''); // State for error message
+    const [errorMessage, setErrorMessage] = useState('');
 
     const GetErrorMessageNoSelItem = () => {
         setShowErrorSelItem(true); // Activate the error state
     };
-
 
     const GetErrorMessageWrongInput = () => {
         setShowErrorInput(true);
@@ -45,13 +29,12 @@ const Header: React.FC = () => {
 
     const handleStats: React.MouseEventHandler<HTMLElement> = (event) => {
         console.log('Navigation link clicked');
-        // Additional logic for handling click event
         fetch('http://localhost:5062/api/stats', {method: 'GET'})
             .then(response => {
-                if (!response.ok) { // Проверка статуса ответа
+                if (!response.ok) {
                     throw new Error('Network response was not ok ' + response.statusText);
                 }
-                return response.json(); // Парсинг JSON
+                return response.json();
             })
             .then(data => {
                 ResultData.BibliothekCount = data.BibliotheksCount;
@@ -78,16 +61,15 @@ const Header: React.FC = () => {
 
     const handleFeedback: React.MouseEventHandler<HTMLElement> = (event) => {
         console.log('Navigation link clicked');
-        // Additional logic for handling click event
         fetch('http://localhost:5062/api/feedbacks', {method: 'GET'})
             .then(response => {
-                if (!response.ok) { // Проверка статуса ответа
+                if (!response.ok) {
                     throw new Error('Network response was not ok ' + response.statusText);
                 }
                 if (response.status == 209){
                     return "keine Feedbacks";
                 }
-                return response.json(); // Парсинг JSON
+                return response.json();
             })
             .then(data => {
                 if (data == "keine Feedbacks"){
@@ -97,8 +79,6 @@ const Header: React.FC = () => {
                     ResultData.Feedbacks = data.map((obj: { Id: number; Name: string; Email: string; Comment: string; Rating: number; }) => new Feedback(obj.Id, obj.Name, obj.Email, obj.Comment, obj.Rating));
                     navigate("/feedbacks")
                 }
-
-
             })
             .catch(error => {
                 console.error('Fehler:', error);
@@ -107,10 +87,7 @@ const Header: React.FC = () => {
 
     const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        console.log('hello');
 
-        // Validate address format
         const addressPattern = /^[a-zA-ZäöüßÄÖÜ-]+(?:\s[a-zA-ZäöüßÄÖÜ-]+)*\s\d{1,2}(?:-\d{1,2})?$/;
         if (!addressPattern.test(searchQuery.trim())) {
             GetErrorMessageWrongInput();
@@ -119,10 +96,9 @@ const Header: React.FC = () => {
 
         if (!selectedItem) {
             GetErrorMessageNoSelItem();
-            return; // Early return to prevent further execution
+            return;
         }
 
-        // Reset error states when performing a successful search
         setShowErrorSelItem(false);
         setShowErrorInput(false);
 
@@ -156,7 +132,7 @@ const Header: React.FC = () => {
         setSelectedItem(eventKey || '');
         const selectedText = (event.target as HTMLElement).textContent;
         setDropdownTitle(selectedText || 'Wähle eine Option');
-        setShowErrorSelItem(false); // Reset error state when a valid option is selected
+        setShowErrorSelItem(false);
         setShowErrorInput(false);
     };
 
@@ -221,7 +197,7 @@ const Header: React.FC = () => {
                                     <NavDropdown.Item onClick={handleFeedback}>
                                         Feedbacks
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href="#action5">
+                                    <NavDropdown.Item href="/impressum">
                                         Impressum
                                     </NavDropdown.Item>
                                 </NavDropdown>

@@ -1,5 +1,3 @@
-import image from "../Assets/wien-panorama_fotolia.jpg"
-import ratingImageSmall from "./RatingImageSmall";
 import "../styles/EplainAlgorithmPage.css"
 
 function FirstStep(){

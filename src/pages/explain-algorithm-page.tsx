@@ -11,7 +11,6 @@ import FifthStep from "../components/FifthStep";
 
 
 function ExplainAlgorithmPage() {
-    const location = useLocation();
     return (
         <div className="explain-algorithm-page" style={{backgroundImage: `url(${WienPanoImageForEplain})`}}>
             <div className="explain-algorithm-page-content">

@@ -19,7 +19,6 @@ interface ImageComponentProps {
 }
 
 const ImageComponent: React.FC<ImageComponentProps> =({ number }) => {
-    // Определяем путь к изображению в зависимости от номера
     let imagePath = '';
     switch (number) {
         case "Bibliotheken":
@@ -62,7 +61,6 @@ const ImageComponent: React.FC<ImageComponentProps> =({ number }) => {
             imagePath = UniversityImage;
             break;
         default:
-            // Если номер не соответствует ни одному изображению, показываем пустую строку
             return null;
     }
 

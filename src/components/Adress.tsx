@@ -3,18 +3,16 @@ import "../styles/Address.css"
 
 function capitalizeWords(str: string): string {
     return str
-        .split(' ') // Разделяем строку на слова
+        .split(' ')
         .map((word) => {
-            // Обрабатываем каждое слово отдельно
             return word
-                .split(/[-_]/) // Разделяем слово на части, если оно содержит дефисы или нижние подчёркивания
+                .split(/[-_]/)
                 .map((part) => {
-                    // Капитализируем каждую часть отдельно
                     return part.charAt(0).toLocaleUpperCase() + part.slice(1).toLocaleLowerCase();
                 })
-                .join('-'); // Соединяем части обратно с дефисами
+                .join('-');
         })
-        .join(' '); // Соединяем слова обратно в строку
+        .join(' ');
 }
 
 function Address() {

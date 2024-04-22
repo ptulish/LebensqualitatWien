@@ -5,7 +5,8 @@ import WienPanoImage from "./pages/wien-pano-image";
 import SearchResultPage from './pages/search-result-page';
 import ExplainAlgorithmPage from "./pages/explain-algorithm-page";
 import StatsPage from "./pages/stats-page";
-import FeedbacksPage from "./pages/feedbacks-page"; // You'll create this component
+import FeedbacksPage from "./pages/feedbacks-page";
+import ImpressumPage from "./pages/impressum-page";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/alg-explain" element={<ExplainAlgorithmPage />} />
                         <Route path="/stats" element={<StatsPage />} />
                         <Route path="/feedbacks" element={<FeedbacksPage />} />
+                        <Route path="/impressum" element={<ImpressumPage />} />
                     </Routes>
                 </div>
 

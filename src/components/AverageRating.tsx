@@ -11,11 +11,11 @@ function getColorByRating(rating: string) {
     if (numRating >= 3.9) {
         return '#90EE90';
     } else if (numRating >= 2.5) {
-        return '#FFD700'; // Золотисто-жёлтый
+        return '#FFD700';
     } else if (numRating >= 1.5) {
-        return '#D8BFD8'; // Светло-сиреневый
+        return '#D8BFD8';
     } else {
-        return '#FFA07A'; // Светло-оранжевый
+        return '#FFA07A';
     }
 }
 

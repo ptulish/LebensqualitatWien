@@ -3,11 +3,6 @@ import "../styles/feedbacks-page.css"
 import React, {ReactNode, useState} from "react";
 import ResultData from "../Data/ResultData";
 import {Button, CloseButton, Col, Form, Row} from "react-bootstrap";
-import DataWorker from "../Data/DataWorker";
-import {Feedback} from "../Data/Feedback";
-
-
-
 
 function FeedbacksPage(){
     const [menuVisible, setMenuVisible] = useState(false);
@@ -17,46 +12,6 @@ function FeedbacksPage(){
     const [name, setName] = useState('');
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState('0');
-
-    // Функция для обработки отправки формы
-    // const handleSubmit = (event: any) => {
-    //     event.preventDefault();
-    //     const feedbackData = { name, email, comment, rating };
-    //     console.log('Submitted Feedback:', feedbackData);
-    //
-    //
-    //
-    //     fetch('http://localhost:5062/api/feedbacks', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ Email: feedbackData.email, Name: feedbackData.name, Rating: feedbackData.rating, Comment: feedbackData.comment }),
-    //     })
-    //         .then(response => {
-    //             if (!response.ok) { // Проверка статуса ответа
-    //                 throw new Error('Network response was not ok ' + response.statusText);
-    //             }
-    //             if (response.status == 209){
-    //                 return "keine Feedbacks";
-    //             }
-    //             return response.json(); // Парсинг JSON
-    //         })
-    //         .then(data => {
-    //             if (data == "keine Feedbacks"){
-    //
-    //                 return;
-    //             } else {
-    //                 ResultData.Feedbacks = data.map((obj: { Id: number; Name: string; Email: string; Comment: string; Rating: number; }) => new Feedback(obj.Id, obj.Name, obj.Email, obj.Comment, obj.Rating));
-    //             }
-    //
-    //
-    //         })
-    //         .catch(error => {
-    //             console.error('Fehler:', error);
-    //         });
-    //     // Здесь может быть логика отправки данных на сервер или иная обработка
-    // };
 
     const handleSubmit = (event: any) => {
         event.preventDefault();

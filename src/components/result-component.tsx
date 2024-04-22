@@ -62,11 +62,11 @@ function ResultComponent() {
                     backgroundPosition: 'center',
                     borderRadius: '30%',
                     width: '100px',
-                    height: '100px', // Adjust this value as needed
-                    display: 'flex', // Use flexbox to center content
-                    justifyContent: 'center', // Center horizontally
+                    height: '100px',
+                    display: 'flex',
+                    justifyContent: 'center',
                     alignItems: 'center',
-                    padding: '8px'// Center vertically
+                    padding: '8px'
                 }}></div>
             </div>
         </div>
